@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <style>
+      body {
+        text-align: center;
+        background-color: black;
+        font-family: arial;
+        font-weight: bold;
+        color: white;
+        font-size: 18pt;
+      }
+    </style>
+  </head> 
+  <body>
+    There are...
+
+    <p id="demo"></p>
+
+    Until October 9th, 2019
+    <br /><br />
+    Assuming you work on average six days per week, you're looking at
+
+    <span id="days"></span>
+
+    more days of this.
+
+    <br /><br />
+
+    Good luck!!!
+
+    <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Oct 9, 2019 19:00:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("demo").innerHTML = days + " days, " + hours + " hours "
+      + minutes + " minutes and " + seconds + " seconds ";
+
+      // If the count down is finished, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+
+    var getDateArray = function(start, end) {
+        var arr = new Array();
+        var dt = new Date(start);
+        while (dt <= end) {
+            arr.push(new Date(dt));
+            dt.setDate(dt.getDate() + 1);
+        }
+        return arr;
+    }
+
+    var calculateDaysRemaining = function() {
+      var endDate = new Date('2019-11-09 00:00:00 EST');
+      var startDate = new Date();
+
+      dateArray = getDateArray(startDate, endDate);
+
+      var arrayLength = dateArray.length;
+      var daysRemaining = 0;
+      for (var i = 0; i < arrayLength; i++) {
+          dow = dateArray[i].getDay();
+          if (dow > 0 & dow < 6) {
+              daysRemaining++;
+          } else {
+              daysRemaining += 0.5
+          }
+      }
+
+      daysRemaining -= 24;
+
+      document.getElementById("days").innerHTML = daysRemaining;
+        
+    }
+    calculateDaysRemaining()
+    </script>
+  </body>
+</html>
+
